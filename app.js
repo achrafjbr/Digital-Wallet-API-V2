@@ -10,15 +10,12 @@ app.use(express.json());
 app.use("/api/users", userRoute);
 app.use("/api/transactions", walletRoute);
 
-app.use((error, request, response) => {
-  return response.status(404).json({
-    message: error.message,
-  });
-});
-
-
+app.use(require("./middlewares/error").notFound);
+app.use(require("./middlewares/error").errorHanlder);
 
 // Server.
 app.listen(3000, () => {
   console.log(`Server running at http://localhost:${3000}`);
 });
+
+

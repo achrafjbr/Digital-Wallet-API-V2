@@ -11,18 +11,10 @@ const hasAWallet = (wallets, userId) => {
   if (wallet) return wallet;
 };
 
-const isNegatifSolde = (solid) => {
-  if (solid <= 0) {
-    return true;
-  } else {
-    return false;
-  }
-};
 
 module.exports = {
   isExisted,
   hasAWallet,
-  isNegatifSolde
 };
 
 

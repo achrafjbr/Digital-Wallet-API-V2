@@ -8,7 +8,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
   "scripts": {
     "dev": "nodemon app.js"
   },

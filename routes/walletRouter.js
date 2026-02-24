@@ -1,16 +1,25 @@
-const walletRoute = require('express').Router();
-const { deposit, withdraw, getAllWallets, getSingleWallet } = require('../controllers/walletController');
+const walletRoute = require("express").Router();
+const {
+  deposit,
+  withdraw,
+  getAllWallets,
+  getSingleWallet,
+  updateWallet,
+  deleteWallet,
+} = require("../controllers/walletController");
 
-walletRoute.post('/deposit/:id', deposit);
+const isNegatifSolde = require("../middlewares/negatifSolde");
 
-walletRoute.post('/withdraw', withdraw);
+walletRoute.post("/deposit/:id", isNegatifSolde, deposit);
 
-walletRoute.get('/:id', getSingleWallet);
+walletRoute.post("/withdraw", withdraw);
 
-walletRoute.get('/', getAllWallets);
+walletRoute.get("/:id", getSingleWallet);
 
+walletRoute.get("/", getAllWallets);
 
+walletRoute.put("/:id", updateWallet);
 
-module.exports = {
-    walletRoute
-}
+walletRoute.delete("/:id", deleteWallet);
+
+module.exports = walletRoute;
