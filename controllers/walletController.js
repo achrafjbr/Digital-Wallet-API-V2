@@ -20,15 +20,6 @@ const deposit = (request, response) => {
   // Reading data from file "data.json".
   const data = readJson(response);
 
-  /*
-     if (isNegatifSolde(balance)) {
-    response.writeHead(412, "Precondition Failed");
-    return response.status(412).json({
-      message: "Sold must be Greather than 0.",
-    });
-  }
-   */
-
   const user = isExisted(data.users, name);
   console.log("user", user);
   if (user) {
@@ -62,27 +53,28 @@ const deposit = (request, response) => {
  * @route /api/transactions/userId
  */
 const withdraw = (request, response) => {
-  const { balance, email, name } = fromJson(request.body);
-  const { id } = request.params.id;
+  console.log("Withdraw");
+
+  const { balance, email, name } = request.body;
+  const {
+    params: { id },
+  } = request;
 
   // Reading data from file "data.json".
   const data = readJson(response);
 
-  if (isNegatifSolde(balance)) {
-    return response.status(404).json({
-      message: "Sold must be Greather than 0.",
-    });
-  }
-  const wallet = hasAWallet(data.wallets, id);
-  
-  if (wallet) {
+  const user = isExisted(data.wallets, name);
+  console.log("user", user);
+  if (user) {
+    const wallet = hasAWallet(data.wallets, user.userId);
     if (balance > wallet.balance && wallet.balance > 0) {
       return response.status(401).json({
         message: `Insufficient balance, Your balance is:, ${wallet.balance}`,
       });
     } else {
       // update sold
-      wallet.balance -= +balance;
+      wallet.balance -= balance;
+
       // Adding historique
       data.historics.push({
         historicId: genereateIds(),
@@ -98,8 +90,9 @@ const withdraw = (request, response) => {
       });
     }
   } else {
-    response.writeHead(404, "Not found");
-    return response.end("User not existed");
+    return response.status(404).json({
+      message: "User not existed",
+    });
   }
 };
 

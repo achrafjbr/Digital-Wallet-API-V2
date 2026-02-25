@@ -12,7 +12,7 @@ const isNegatifSolde = require("../middlewares/negatifSolde");
 
 walletRoute.post("/deposit/:id", isNegatifSolde, deposit);
 
-walletRoute.post("/withdraw", withdraw);
+walletRoute.post("/withdraw/:id", withdraw);
 
 walletRoute.get("/:id", getSingleWallet);
 

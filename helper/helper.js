@@ -8,6 +8,7 @@ const isExisted = (users, name, email="") => {
 
 const hasAWallet = (wallets, userId) => {
   const wallet = wallets.find((wallet) => wallet.userId == userId);
+  console.log(wallet)
   if (wallet) return wallet;
 };
 
