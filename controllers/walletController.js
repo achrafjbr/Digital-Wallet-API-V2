@@ -102,7 +102,7 @@ const withdraw = (request, response) => {
  * @access public
  * @route /api/transactions
  */
-const getAllWallets = (_, response) => {
+const getAllWallets = (request, response) => {
   const wallets = readJson(response).wallets;
   if (!wallets)
     return response.status(404).json({ message: "No Wallet found" });
@@ -124,7 +124,7 @@ const getSingleWallet = (request, response) => {
   const wallet = data.wallets.find((w) => w.walletId == id);
   if (!wallet)
     return response.status(404).json({
-      message: "NO Wallet found",
+      message: "NO wallet found",
     });
 
   return response.status(200).json(wallet);
@@ -175,6 +175,24 @@ const deleteWallet = (request, response) => {
   });
 };
 
+const filterByBanlance = (request, response) => {
+  const balance = request.query.balance;
+
+  const data = readJson(response);
+
+  const wallets = data.wallets.filter((w) => w.balance == balance);
+  console.log(data.wallets);
+  if (wallets.length == 0)
+    return response.status(404).json({
+      wallets: data.wallets,
+    });
+
+  return response.status(200).json(wallets);
+
+  // Reading data from file "data.json".
+  // const data = readJson(response);
+};
+
 module.exports = {
   deposit,
   withdraw,
@@ -182,4 +200,5 @@ module.exports = {
   getSingleWallet,
   updateWallet,
   deleteWallet,
+  filterByBanlance,
 };

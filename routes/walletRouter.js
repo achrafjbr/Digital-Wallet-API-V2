@@ -6,17 +6,20 @@ const {
   getSingleWallet,
   updateWallet,
   deleteWallet,
+  filterByBanlance,
 } = require("../controllers/walletController");
 
 const isNegatifSolde = require("../middlewares/negatifSolde");
+
+walletRoute.get("/", getAllWallets);
+
+walletRoute.get("/search", filterByBanlance);
 
 walletRoute.post("/deposit/:id", isNegatifSolde, deposit);
 
 walletRoute.post("/withdraw/:id", withdraw);
 
 walletRoute.get("/:id", getSingleWallet);
-
-walletRoute.get("/", getAllWallets);
 
 walletRoute.put("/:id", updateWallet);
 

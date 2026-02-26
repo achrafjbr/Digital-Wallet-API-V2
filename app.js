@@ -7,6 +7,7 @@ process.config;
 //const port = 3000;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/api/users", userRoute);
 app.use("/api/transactions", walletRoute);
 
@@ -17,5 +18,3 @@ app.use(require("./middlewares/error").errorHanlder);
 app.listen(3000, () => {
   console.log(`Server running at http://localhost:${3000}`);
 });
-
-

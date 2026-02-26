@@ -6,7 +6,7 @@ const notFound = (request, response, next) => {
 
 const errorHanlder = (err, _, response, next) => {
   const statusCode = response.statusCode === 200 ? 500 : response.statusCode;
-  response.status(statusCode).json({ message: err.message });
+  response.status(statusCode).json({ messages: err.message });
 };
 
 module.exports = {
