@@ -153,7 +153,12 @@ const updateWallet = (request, response) => {
   writeJson(response, data);
   return response.status(200).json(data.wallets[walletIndex]);
 };
-
+/**
+ * @desc Delete the wallet and his owner
+ * @method DELETE
+ * @access public
+ * @route /api/transactions/userId
+ */
 const deleteWallet = (request, response) => {
   const {
     params: { id },
@@ -175,6 +180,12 @@ const deleteWallet = (request, response) => {
   });
 };
 
+/**
+ * @desc Filter wallet by balance
+ * @method POST
+ * @access public
+ * @route /api/transactions/search?balance=3
+ */
 const filterByBanlance = (request, response) => {
   const balance = request.query.balance;
 
@@ -193,6 +204,49 @@ const filterByBanlance = (request, response) => {
   // const data = readJson(response);
 };
 
+/**
+ * @desc Pagination i guess each page will have 3 wallet : [page 1] includes [3 wallets]
+ * @method GET
+ * @access public
+ * @route /api/transactions/userId
+ */
+
+const getSpecificWallets = (request, response) => {
+  let currentPage = request.query.page || 1;
+  const walletNumberPerPage = 3;
+  let currentWallets = [];
+  console.log(request.query.page);
+  try {
+    const data = readJson(response);
+    const walletsNumber = data.wallets.length; // 10 W - 3 P = 7
+
+    // if the targeted page gthan number of wallets.
+    if (currentPage > walletsNumber) {
+      console.log("IF");
+      // Getting the last three pages
+      let lastThreePages = walletsNumber - walletNumberPerPage;
+      while (lastThreePages < walletsNumber) {
+        currentWallets.push(data.wallets[lastThreePages]);
+        lastThreePages++;
+      }
+    } else {
+      console.log("ELSE"); // 1*3 = 3
+      // Getting wallets from the targeted page +3
+      const start = currentPage ; 
+      const end = currentPage * walletNumberPerPage;
+      for (let index = start; index < end; index++) {
+        currentWallets.push(data.wallets[index]);
+      }
+    }
+  } catch (e) {
+    console.log(e);
+  }
+
+  response.status(200).json({
+    data: currentWallets,
+  });
+};
+
 module.exports = {
   deposit,
   withdraw,
@@ -201,4 +255,5 @@ module.exports = {
   updateWallet,
   deleteWallet,
   filterByBanlance,
+  getSpecificWallets,
 };

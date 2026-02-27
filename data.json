@@ -2,9 +2,33 @@
   "users": [
     {
       "userId": "1771926737157-0.6895636574819151",
-      "name": "Achraf",
+      "name": "Achraf jbr",
       "email": "achrafjbr@gmail.com",
       "password": "103040"
+    },
+    {
+      "userId": "1772198798997-0.990270579588448",
+      "name": "Kamal",
+      "email": "kamal@gmail.com",
+      "password": "ABCDF"
+    },
+    {
+      "userId": "1772199012855-0.5434995089554991",
+      "name": "Ahemd",
+      "email": "ahmed@gmail.com",
+      "password": "1000sdd"
+    },
+    {
+      "userId": "1772199028658-0.8484510128629676",
+      "name": "Nasrdine",
+      "email": "nasrdine@gmail.com",
+      "password": "nasrdine1111"
+    },
+    {
+      "userId": "1772199305653-0.004998847124529804",
+      "name": "Jamal",
+      "email": "jamal@gmail.com",
+      "password": "nas1111"
     }
   ],
   "wallets": [
@@ -13,6 +37,30 @@
       "name": "Achraf",
       "userId": "1771926737157-0.6895636574819151",
       "balance": 250
+    },
+    {
+      "walletId": "1772198798997-0.3373618906963669",
+      "name": "Kamal",
+      "userId": "1772198798997-0.990270579588448",
+      "balance": 100
+    },
+    {
+      "walletId": "1772199012855-0.5358890669161225",
+      "name": "Ahemd",
+      "userId": "1772199012855-0.5434995089554991",
+      "balance": 0
+    },
+    {
+      "walletId": "1772199028658-0.22146923352519232",
+      "name": "Nasrdine",
+      "userId": "1772199028658-0.8484510128629676",
+      "balance": 0
+    },
+    {
+      "walletId": "1772199305653-0.8445708073502286",
+      "name": "Jamal",
+      "userId": "1772199305653-0.004998847124529804",
+      "balance": 0
     }
   ],
   "historics": [
@@ -36,6 +84,13 @@
       "name": "Achraf",
       "userId": "1771926737157-0.6895636574819151",
       "date": "3-1-2026"
+    },
+    {
+      "historicId": "1772198962866-0.9199157625649844",
+      "deposit": 100,
+      "name": "Kamal",
+      "userId": "1772198798997-0.990270579588448",
+      "date": "5-1-2026"
     }
   ]
 }

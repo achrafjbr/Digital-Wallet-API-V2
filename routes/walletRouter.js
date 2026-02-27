@@ -1,3 +1,4 @@
+
 const walletRoute = require("express").Router();
 const {
   deposit,
@@ -7,6 +8,7 @@ const {
   updateWallet,
   deleteWallet,
   filterByBanlance,
+  getSpecificWallets
 } = require("../controllers/walletController");
 
 const isNegatifSolde = require("../middlewares/negatifSolde");
@@ -14,6 +16,8 @@ const isNegatifSolde = require("../middlewares/negatifSolde");
 walletRoute.get("/", getAllWallets);
 
 walletRoute.get("/search", filterByBanlance);
+
+walletRoute.get("/paging", getSpecificWallets);
 
 walletRoute.post("/deposit/:id", isNegatifSolde, deposit);
 
@@ -24,5 +28,6 @@ walletRoute.get("/:id", getSingleWallet);
 walletRoute.put("/:id", updateWallet);
 
 walletRoute.delete("/:id", deleteWallet);
+
 
 module.exports = walletRoute;
